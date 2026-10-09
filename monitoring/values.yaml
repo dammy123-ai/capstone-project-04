@@ -1,0 +1,17 @@
+alertmanager:
+  enabled: false
+grafana:
+  admin:
+    existingSecret: grafana-admin
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    retention: 3d
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubeEtcd:
+  enabled: false
+kubeProxy:
+  enabled: false
