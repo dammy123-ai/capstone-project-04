@@ -20,13 +20,9 @@ echo "== Monitoring namespace + Grafana secret =="
 kubectl get namespace monitoring >/dev/null 2>&1 || kubectl create namespace monitoring
 
 if ! kubectl -n monitoring get secret grafana-admin >/dev/null 2>&1; then
-  GRAFANA_PW="$(aws secretsmanager get-secret-value --secret-id "zuri/${ENV_NAME}/grafana" \
-    --query SecretString --output text --region eu-west-1 2>/dev/null || true)"
-  if [ -z "$GRAFANA_PW" ]; then
-    GRAFANA_PW="$(openssl rand -base64 18)"
-    aws secretsmanager put-secret-value --secret-id "zuri/${ENV_NAME}/grafana" \
-      --secret-string "$GRAFANA_PW" --region eu-west-1
-  fi
+  GRAFANA_JSON="$(aws secretsmanager get-secret-value --secret-id "zuri/${ENV_NAME}/grafana" \
+    --query SecretString --output text --region eu-west-1)"
+  GRAFANA_PW="$(echo "$GRAFANA_JSON" | jq -r '."admin-password"')"
   kubectl -n monitoring create secret generic grafana-admin \
     --from-literal=admin-user=admin \
     --from-literal=admin-password="$GRAFANA_PW"
