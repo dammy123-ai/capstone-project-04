@@ -12,7 +12,7 @@ echo "== Sync backend secret =="
 ./scripts/sync-secrets.sh "$ENV_NAME"
 
 echo "== App manifests =="
-kubectl apply -f k8s/backend/ -f k8s/frontend/ -f k8s/ingress.yaml
+kubectl apply -f k8s/backend/configmap.yaml -f k8s/backend/deployment.yaml -f k8s/backend/service.yaml -f k8s/frontend/ -f k8s/ingress.yaml
 kubectl -n zuri-market rollout status deployment/backend --timeout=120s
 kubectl -n zuri-market rollout status deployment/frontend --timeout=120s
 
