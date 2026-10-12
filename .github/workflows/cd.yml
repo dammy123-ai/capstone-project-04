@@ -3,12 +3,12 @@ name: cd
 on:
   push:
     branches: [main]
-      paths:
+    paths:
       - 'terraform/**'
       - 'k8s/**'
       - 'monitoring/**'
       - 'scripts/**'
-      - '.github/workflows/cd.yml
+      - '.github/workflows/cd.yml'
 
 permissions:
   id-token: write
