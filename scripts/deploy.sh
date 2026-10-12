@@ -44,3 +44,4 @@ kubectl apply -f k8s/backend/servicemonitor.yaml
 echo "Deploy complete."
 EOF
 chmod +x scripts/deploy.sh# trigger CD test
+# trigger CD test 2
