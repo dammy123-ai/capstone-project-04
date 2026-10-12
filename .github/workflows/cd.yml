@@ -8,6 +8,7 @@ on:
       - 'k8s/**'
       - 'monitoring/**'
       - 'scripts/**'
+      - '.github/workflows/cd.yml'
 
 permissions:
   id-token: write
